@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SecurePrompt-Shield </title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="CSS/main.css"/>
+  <link rel="stylesheet" href="CSS/dashboard.css"/>
+  <link rel="stylesheet" href="CSS/animations.css"/>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="nav-left">
+    <div class="nav-logo-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" fill="rgba(52,199,89,0.2)" stroke="#34c759" stroke-width="1.5"/>
+        <path d="M9 12l2 2 4-4" stroke="#34c759" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="nav-brand">
+      <span class="nav-title">ZeroPrompt AI</span>
+      <span class="nav-sub">Real-time Injection Firewall</span>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="ntab active" onclick="go('firewall')" id="tab-firewall">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="ntab" onclick="go('analysis')" id="tab-analysis">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Analysis
+    </button>
+    <button class="ntab" onclick="go('logs')" id="tab-logs">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      Detection Rules
+    </button>
+    <button class="ntab" onclick="go('policy')" id="tab-policy">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Policy
+    </button>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-notif">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="notif-badge" id="notif-count">0</span>
+    </div>
+    <div class="backend-pill">
+      <span class="bpill-dot"></span>
+      <span class="bpill-txt">BACKEND CONNECTED</span>
+    </div>
+  </div>
+</nav>
+
+<div id="content">
+
+  <!-- DASHBOARD TAB -->
+  <div id="pane-firewall" class="pane on">
+
+    <div class="stat-grid">
+
+      <div class="scard">
+        <div class="scard-top">
+          <div class="scard-icon red">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="scard-delta red" id="s-delta-blocked">+0%</span>
+        </div>
+        <div class="scard-val red" id="s-blocked">0</div>
+        <div class="scard-lbl">THREATS BLOCKED</div>
+      </div>
+
+      <div class="scard scard-featured">
+        <div class="scard-top">
+          <div class="scard-icon cyan">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="scard-delta cyan" id="s-delta-total">+0%</span>
+        </div>
+        <div class="scard-val cyan" id="s-total">0</div>
+        <div class="scard-lbl">PROMPTS ANALYZED</div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-top">
+          <div class="scard-icon yellow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <span class="scard-delta green">89</span>
+        </div>
+        <div class="scard-val yellow">89</div>
+        <div class="scard-lbl">ACTIVE RULES</div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-top">
+          <div class="scard-icon orange">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span class="scard-delta orange" id="s-delta-alerts">-0%</span>
+        </div>
+        <div class="scard-val orange" id="s-alerts">0</div>
+        <div class="scard-lbl">CRITICAL ALERTS</div>
+      </div>
+
+    </div>
+
+    <!-- Scanner -->
+    <div class="scanner-card">
+      <div class="scanner-header">
+        <div class="scanner-title-row">
+          <div class="scanner-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div>
+            <div class="scanner-title">Live Prompt Scanner</div>
+            <div class="scanner-sub">Test prompts for injection attacks</div>
+          </div>
+        </div>
+        <div class="preset-row">
+          <span class="preset-lbl">ATTACK PRESETS</span>
+          <button class="pb crit" onclick="loadPreset(0)">Base64 Attack</button>
+          <button class="pb crit" onclick="loadPreset(1)">DB Credentials</button>
+          <button class="pb crit" onclick="loadPreset(3)">DAN Jailbreak</button>
+          <button class="pb warn" onclick="loadPreset(4)">Token Inject</button>
+          <button class="pb warn" onclick="loadPreset(6)">SQL Injection</button>
+          <button class="pb warn" onclick="loadPreset(8)">Social Eng.</button>
+          <button class="pb safe" onclick="loadPreset(9)">Clean Input</button>
+        </div>
+      </div>
+
+      <!-- INPUT STREAM -->
+      <div class="stream-box" id="ip-inp">
+        <div class="stream-hdr">
+          <div class="stream-label">
+            <span class="stream-dot green-dot"></span>
+            INPUT STREAM
+          </div>
+          <div class="stream-badges">
+            <span class="ebadge anim-blink" id="inp-eb" style="display:none">⚠ ENCODED</span>
+            <span class="rbadge" id="inp-rb"></span>
+            <span class="tcnt"   id="inp-tc"></span>
+          </div>
+        </div>
+        <div class="rbar"><div class="rfill" id="inp-bar"></div></div>
+        <textarea class="stream-ta" id="promptInput"
+          placeholder="Paste user prompt or attack payload here…&#10;&#10;Try a preset above ↑ or type any text"
+          oninput="liveInpScan()"></textarea>
+        <div id="inp-findings" class="findings-area"></div>
+        <div class="cc" id="inp-cc">0 characters</div>
+      </div>
+
+      <!-- OUTPUT STREAM -->
+      <div class="stream-box" id="ip-out">
+        <div class="stream-hdr">
+          <div class="stream-label">
+            <span class="stream-dot yellow-dot"></span>
+            OUTPUT STREAM
+          </div>
+          <div class="stream-badges">
+            <span class="rbadge" id="out-rb"></span>
+            <span class="tcnt"   id="out-tc"></span>
+          </div>
+        </div>
+        <div class="rbar"><div class="rfill" id="out-bar"></div></div>
+        <textarea class="stream-ta stream-ta-sm" id="outputInput"
+          placeholder="Paste LLM response here to scan for data leaks…&#10;&#10;Try: 'DB URL: postgres://admin:secret@db.company.com/prod'"
+          oninput="liveOutScan()"></textarea>
+        <div id="out-findings" class="findings-area"></div>
+        <div class="cc" id="out-cc">0 characters</div>
+      </div>
+
+      <!-- SCAN BUTTON -->
+      <button class="scan-main-btn" id="scan-btn" onclick="fullScan()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Scan Prompt
+      </button>
+
+      <div class="row-actions">
+        <button class="ghost-btn" onclick="clearAll()">Clear</button>
+        <button class="ghost-btn hi" onclick="go('analysis')">Deep Analysis →</button>
+        <div class="pi-hint">
+          Block ≥ <span id="pi-blk" class="red-txt">65</span>
+          &nbsp;·&nbsp;
+          Sanitize ≥ <span id="pi-san" class="yellow-txt">30</span>
+          &nbsp;·&nbsp;
+          <span style="color:rgba(255,255,255,0.25);font-size:11px">Ctrl+Enter to scan</span>
+        </div>
+      </div>
+
+      <!-- Encoded alert -->
+      <div class="ealert" id="ea" style="display:none">
+        <span class="ealert-ico anim-blink">⚠</span>
+        <div>
+          <div class="etitle">ENCODED CONTENT DECODED — HIDDEN ATTACK FOUND</div>
+          <div class="esub" id="ea-sub"></div>
+        </div>
+        <button class="tbtn" id="ea-tbtn" onclick="toggleDecoded()">HIDE LAYERS</button>
+      </div>
+
+      <div id="decoded-layers"></div>
+      <div id="dbanner" style="display:none"></div>
+
+    </div><!-- /scanner-card -->
+
+  </div><!-- /pane-firewall -->
+
+
+  <!-- ANALYSIS TAB -->
+  <div id="pane-analysis" class="pane">
+    <div id="analysis-wrap">
+      <div class="empty-state">
+        <div style="font-size:52px;margin-bottom:16px">🔍</div>
+        <div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:8px">No Scan Data Yet</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.38);font-family:'JetBrains Mono',monospace">Run a scan from Dashboard first</div>
+        <button onclick="go('firewall')" class="goto-btn">Go to Dashboard →</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- DETECTION RULES / LOGS TAB -->
+  <div id="pane-logs" class="pane">
+    <div class="section-card">
+      <div class="sc-hdr">
+        <span class="sc-ttl">Security Event Log</span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span id="log-cnt" style="font-size:12px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace">0 events</span>
+          <button class="ghost-btn" onclick="LogStore.clear()">Clear</button>
+        </div>
+      </div>
+      <div class="log-hdr-row">
+        <span>TIME</span><span>RISK</span><span>ACTION</span><span>PROMPT PREVIEW</span><span style="text-align:right">THREATS</span>
+      </div>
+      <div id="log-rows"></div>
+    </div>
+  </div>
+
+
+  <!-- POLICY TAB -->
+  <div id="pane-policy" class="pane">
+    <div class="pgrid">
+
+      <div class="section-card">
+        <div class="sc-hdr"><span class="sc-ttl">Policy Thresholds</span></div>
+        <div class="sc-body">
+
+          <div class="thresh-block">
+            <div class="thresh-row">
+              <div>
+                <div class="thresh-name">BLOCK THRESHOLD</div>
+                <div class="thresh-desc">Requests above this score are rejected entirely</div>
+              </div>
+              <span class="tval red-txt" id="bval">65</span>
+            </div>
+            <div class="rng-wrap"><div class="rng-fill" id="bfill" style="width:65%;background:linear-gradient(90deg,rgba(255,59,48,0.4),#ff3b30)"></div></div>
+            <input type="range" min="0" max="100" value="65" oninput="updatePolicy('block',this.value)" class="range-inp" style="accent-color:#ff3b30"/>
+          </div>
+
+          <div class="thresh-block">
+            <div class="thresh-row">
+              <div>
+                <div class="thresh-name">SANITIZE THRESHOLD</div>
+                <div class="thresh-desc">Requests above this score are cleaned before forwarding</div>
+              </div>
+              <span class="tval yellow-txt" id="sval">30</span>
+            </div>
+            <div class="rng-wrap"><div class="rng-fill" id="sfill" style="width:30%;background:linear-gradient(90deg,rgba(255,214,10,0.4),#ffd60a)"></div></div>
+            <input type="range" min="0" max="100" value="30" oninput="updatePolicy('san',this.value)" class="range-inp" style="accent-color:#ffd60a"/>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="sc-hdr">
+          <span class="sc-ttl">Detection Capabilities</span>
+          <span style="font-size:12px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace">34R · 12S · 8C rules active</span>
+        </div>
+        <div class="sc-body" style="max-height:480px;overflow-y:auto" id="cap-list"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- Scripts -->
+<script src="components/gauge.js"></script>
+<script src="components/radar.js"></script>
+<script src="components/logs.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/scanner.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/simulator.js"></script>
+
+<script>
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 'Enter') fullScan();
+});
+
+// Update notif badge from s-alerts
+const _origUpdate = typeof updateStats === 'function' ? updateStats : null;
+function syncNotif() {
+  const v = document.getElementById('s-alerts');
+  if (v) document.getElementById('notif-count').textContent = v.textContent || '0';
+}
+setInterval(syncNotif, 1000);
+
+// tab switching — highlight active tab
+function go(tab) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+  const pane = document.getElementById('pane-' + tab);
+  const tabBtn = document.getElementById('tab-' + tab);
+  if (pane) pane.classList.add('on');
+  if (tabBtn) tabBtn.classList.add('active');
+  if (typeof AppState !== 'undefined') AppState.activeTab = tab;
+}
+</script>
+
+</body>
+</html>

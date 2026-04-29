@@ -1,0 +1,14 @@
+/* ── ANIMATIONS ───────────────────────────────── */
+@keyframes fadeIn   { from{opacity:0}         to{opacity:1} }
+@keyframes slideUp  { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse    { 0%,100%{opacity:1}       50%{opacity:.25} }
+@keyframes blink    { 0%,100%{opacity:1}       50%{opacity:.4} }
+@keyframes rot      { to{transform:rotate(360deg)} }
+@keyframes scanline { 0%{top:-2px}             100%{top:100%} }
+
+/* Applied classes */
+.anim-pulse  { animation: pulse   2s infinite }
+.anim-blink  { animation: blink   1s infinite }
+.anim-rot    { animation: rot     .7s linear infinite }
+.sdot        { animation: pulse   2s infinite }
+.ldot        { animation: pulse   1.5s infinite }

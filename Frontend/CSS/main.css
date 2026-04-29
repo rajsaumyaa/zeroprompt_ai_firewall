@@ -1,0 +1,69 @@
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #040d1a;
+  --bg2:     #071325;
+  --panel:   #0a1a2e;
+  --card:    #0d1f38;
+  --card2:   #102540;
+  --border:  rgba(0,180,255,0.12);
+  --border2: rgba(0,180,255,0.28);
+  --text:    #e8f4ff;
+  --text2:   rgba(200,230,255,0.80);
+  --muted:   rgba(140,190,255,0.50);
+  --red:     #ff4444;
+  --orange:  #ff9900;
+  --yellow:  #ffe000;
+  --green:   #00ff88;
+  --cyan:    #00e5ff;
+  --blue:    #00aaff;
+  --neon:    #00cfff;
+  --radius:  14px;
+}
+
+html, body {
+  width: 100%; min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Neon blue grid background */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,255,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none; z-index: 0;
+}
+
+/* Top-right neon blue glow orb */
+body::after {
+  content: '';
+  position: fixed; top: -120px; right: -80px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,180,255,0.08) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+#content {
+  position: relative; z-index: 1;
+  max-width: 1280px; margin: 0 auto;
+  padding: 24px 28px 80px;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,180,255,0.2); border-radius: 99px; }
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+.red-txt    { color: var(--red)    !important; font-weight: 700; }
+.yellow-txt { color: var(--yellow) !important; font-weight: 700; }
+
+.pane { display: none; }
+.pane.on { display: block; }
