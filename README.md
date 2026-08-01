@@ -169,7 +169,7 @@ Open your browser and navigate to:
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
 .
