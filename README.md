@@ -137,7 +137,7 @@ Open your browser and navigate to:
       "Jailbreak": 1
     }
   }
-}
+
   ```
 
 ### 3. Get Audit Logs
